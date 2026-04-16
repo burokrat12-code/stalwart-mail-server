@@ -1,7 +1,7 @@
 [server]
-hostname = "mail.cargo-port.eu"
+hostname = "${HOSTNAME:-mail.cargo-port.eu}"
 base-directory = "/var/lib/stalwart"
-log-level = "info"
+log-level = "${LOG_LEVEL:-info}"
 
 [listener."smtp"]
 bind = "0.0.0.0:25"
@@ -27,15 +27,15 @@ protocol = "imap"
 tls.implicit = true
 
 [tls]
-server.cert = "/etc/stalwart/certs/mail.cargo-port.eu.crt"
-server.key = "/etc/stalwart/certs/mail.cargo-port.eu.key"
+server.cert = "/etc/stalwart/certs/${HOSTNAME:-mail.cargo-port.eu}.crt"
+server.key = "/etc/stalwart/certs/${HOSTNAME:-mail.cargo-port.eu}.key"
 
 [auth]
 directory = "internal"
 fallback = "sqlite"
 
 [auth.internal]
-admin = "{CRYPT}admin123_hash"
+admin = "${ADMIN_HASH}"
 
 [store]
 type = "sqlite"
@@ -46,5 +46,5 @@ type = "sqlite"
 path = "/var/lib/stalwart/queue.sqlite"
 
 [reporting]
-to = "admin@cargo-port.eu"
-from = "reports@cargo-port.eu"
+to = "${REPORT_TO:-admin@cargo-port.eu}"
+from = "${REPORT_FROM:-reports@cargo-port.eu}"
