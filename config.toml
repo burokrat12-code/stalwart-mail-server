@@ -1,0 +1,50 @@
+[server]
+hostname = "mail.cargo-port.eu"
+base-directory = "/var/lib/stalwart"
+log-level = "info"
+
+[listener."smtp"]
+bind = "0.0.0.0:25"
+protocol = "smtp"
+
+[listener."submission"]
+bind = "0.0.0.0:587"
+protocol = "smtp"
+require-tls = false
+
+[listener."submissions"]
+bind = "0.0.0.0:465"
+protocol = "smtp"
+tls.implicit = true
+
+[listener."imap"]
+bind = "0.0.0.0:143"
+protocol = "imap"
+
+[listener."imaps"]
+bind = "0.0.0.0:993"
+protocol = "imap"
+tls.implicit = true
+
+[tls]
+server.cert = "/etc/stalwart/certs/mail.cargo-port.eu.crt"
+server.key = "/etc/stalwart/certs/mail.cargo-port.eu.key"
+
+[auth]
+directory = "internal"
+fallback = "sqlite"
+
+[auth.internal]
+admin = "{CRYPT}admin123_hash"
+
+[store]
+type = "sqlite"
+path = "/var/lib/stalwart/data.sqlite"
+
+[queue]
+type = "sqlite"
+path = "/var/lib/stalwart/queue.sqlite"
+
+[reporting]
+to = "admin@cargo-port.eu"
+from = "reports@cargo-port.eu"
