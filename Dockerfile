@@ -9,8 +9,8 @@ RUN apk add --no-cache \
     libgcc \
     libstdc++
 
-# Установка Stalwart Mail Server
-RUN curl -L https://github.com/stalwartlabs/mail-server/releases/latest/download/stalwart-mail-alpine-x86_64.tar.gz | tar xz -C /usr/local/bin
+# Установка Stalwart Mail Server (фиксированная версия)
+RUN curl -L https://github.com/stalwartlabs/mail-server/releases/download/v0.9.4/stalwart-mail-alpine-x86_64.tar.gz | tar xz -C /usr/local/bin
 
 # Создание директорий
 RUN mkdir -p /etc/stalwart /var/lib/stalwart /var/log/stalwart
