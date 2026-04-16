@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  stalwart:
+    build: .
+    ports:
+      - "25:25"
+      - "587:587"
+      - "465:465"
+      - "143:143"
+      - "993:993"
+      - "110:110"
+      - "995:995"
+    volumes:
+      - ./data:/var/lib/stalwart
+      - ./certs:/etc/stalwart/certs
+      - ./config.toml:/etc/stalwart/config.toml:ro
+    restart: unless-stopped
